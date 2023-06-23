@@ -1,0 +1,17 @@
+name: Auto-Merge Approved PR
+on:
+  pull_request_review:
+    types:
+      - submitted
+permissions:
+  pull-requests: write
+  contents: write
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    if: github.event.review.state == 'approved'
+    steps:
+      - uses: peter-evans/enable-pull-request-automerge@v3
+        with:
+          pull-request-number: ${{ github.event.pull_request.number }}
+          merge-method: rebase
