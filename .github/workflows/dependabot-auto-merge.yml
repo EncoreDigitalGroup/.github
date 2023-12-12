@@ -1,6 +1,10 @@
 name: Dependabot Auto-Merge
 on:
   workflow_call:
+    inputs:
+      gh_actor:
+        required: true
+        type: string
 
 permissions:
   pull-requests: write
@@ -9,7 +13,7 @@ permissions:
 jobs:
   Dependabot:
     runs-on: ubuntu-latest
-    if: ${{ github.triggering_actor == 'dependabot[bot]' }}
+    if: ${{ inputs.gh_actor == 'dependabot[bot]' }}
     steps:
 
       - name: Dependabot Metadata
