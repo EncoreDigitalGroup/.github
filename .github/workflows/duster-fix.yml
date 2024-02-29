@@ -12,7 +12,7 @@ on:
         types: [checks_requested]
 
 jobs:
-  duster:
+  Duster:
     runs-on: ubuntu-latest
 
     permissions:
