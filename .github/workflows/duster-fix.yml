@@ -9,6 +9,7 @@ on:
     #pull_request:
     workflow_call:
     merge_group:
+        types: [checks_requested]
 
 jobs:
   duster:
