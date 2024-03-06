@@ -1,7 +1,8 @@
 name: PHP Code Analysis
-on: workflow_call
+on:
+  workflow_call:
 
 jobs:
-  larastan:
+  Larastan:
     if: ${{ github.actor != 'dependabot[bot]' }}
     uses: EncoreDigitalGroup/.github-private/.github/workflows/phpstan.yml@main
