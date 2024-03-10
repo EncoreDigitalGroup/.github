@@ -2,6 +2,11 @@ name: PHP Code Analysis
 
 on:
   workflow_call:
+    inputs:
+      composer_auth_json:
+        type: string
+        required: true
+        description: 'Composer Auth JSON'
 
 jobs:
   StaticAnalysis:
@@ -11,6 +16,10 @@ jobs:
         with:
           php-version: '8.3'
       - uses: actions/checkout@v3
+      - name: Add Composer Auth File
+        run: |
+          touch $GITHUB_WORKSPACE/auth.json
+          echo '${{inputs.composer_auth_json}}' > $GITHUB_WORKSPACE/auth.json
       - name: Install Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
       - uses: php-actions/phpstan@v3
