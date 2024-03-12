@@ -1,0 +1,30 @@
+name: Create Release
+
+on:
+  workflow_call:
+    inputs:
+      generate_release_notes:
+        type: boolean
+        description: 'Generate release notes'
+        required: false
+        default: true
+      is_draft:
+        type: boolean
+        description: 'Is draft'
+        required: false
+        default: false
+
+jobs:
+  CreateRelease:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Release
+        id: create_release
+        uses: ncipollo/release-action@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          generateReleaseNotes: ${{ github.event.inputs.generate_release_notes }}
+          draft: ${{ github.event.inputs.is_draft }}
+          prerelease: false
