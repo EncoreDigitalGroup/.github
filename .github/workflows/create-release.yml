@@ -25,6 +25,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          generateReleaseNotes: ${{ github.event.inputs.generate_release_notes }}
-          draft: ${{ github.event.inputs.is_draft }}
+          generateReleaseNotes: ${{ inputs.generate_release_notes }}
+          draft: ${{ inputs.is_draft }}
           prerelease: false

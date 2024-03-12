@@ -22,6 +22,6 @@ jobs:
         uses: actions/checkout@master
       - uses: EncoreDigitalGroup/action-sync-branch@main
         with:
-          branch: ${{ github.event.inputs.branch }}
+          branch: ${{ inputs.branch }}
           token: ${{ secrets.GITHUB_TOKEN }}
-          force: ${{ github.event.inputs.force }}
+          force: ${{ inputs.force }}
