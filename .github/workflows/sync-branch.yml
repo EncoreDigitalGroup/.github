@@ -1,0 +1,27 @@
+name: Sync Branch
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        type: string
+        description: 'Branch to sync'
+        required: true
+      force:
+        type: boolean
+        description: 'Force push'
+        required: false
+        default: false
+
+jobs:
+  SyncBranch:
+    name: Sync Branch
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - uses: EncoreDigitalGroup/action-sync-branch@main
+        with:
+          branch: ${{ github.event.inputs.branch }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          force: ${{ github.event.inputs.force }}
