@@ -3,6 +3,10 @@ name: Sync Branch
 on:
   workflow_call:
     inputs:
+      token:
+        type: string
+        description: 'GitHub token'
+        required: true
       branch:
         type: string
         description: 'Branch to sync'
@@ -23,5 +27,5 @@ jobs:
       - uses: EncoreDigitalGroup/action-sync-branch@main
         with:
           branch: ${{ inputs.branch }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ inputs.token }}
           force: ${{ inputs.force }}
