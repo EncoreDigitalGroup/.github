@@ -7,6 +7,11 @@ on:
         type: string
         description: 'GitHub token'
         required: true
+      pre_release:
+        type: boolean
+        description: 'Pre-release'
+        required: false
+        default: false
       generate_release_notes:
         type: boolean
         description: 'Generate release notes'
@@ -31,4 +36,4 @@ jobs:
         with:
           generateReleaseNotes: ${{ inputs.generate_release_notes }}
           draft: ${{ inputs.is_draft }}
-          prerelease: false
+          prerelease: ${{ inputs.pre_release }}
