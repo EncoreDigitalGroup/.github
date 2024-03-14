@@ -3,10 +3,6 @@ name: Create Release
 on:
   workflow_call:
     inputs:
-      token:
-        type: string
-        description: 'GitHub token'
-        required: true
       pre_release:
         type: boolean
         description: 'Pre-release'
@@ -32,7 +28,7 @@ jobs:
         id: create_release
         uses: ncipollo/release-action@v1
         env:
-          GITHUB_TOKEN: ${{ inputs.token }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           generateReleaseNotes: ${{ inputs.generate_release_notes }}
           draft: ${{ inputs.is_draft }}
