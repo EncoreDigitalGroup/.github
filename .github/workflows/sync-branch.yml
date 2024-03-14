@@ -26,5 +26,5 @@ jobs:
       - uses: EncoreDigitalGroup/action-sync-branch@main
         with:
           branch: ${{ inputs.branch }}
-          token: ${{ inputs.token }}
+          token: ${{ secrets.token }}
           force: ${{ inputs.force }}
