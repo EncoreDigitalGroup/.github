@@ -2,11 +2,10 @@ name: Sync Branch
 
 on:
   workflow_call:
-    inputs:
+    secrets:
       token:
-        type: string
-        description: 'GitHub token'
         required: true
+    inputs:
       branch:
         type: string
         description: 'Branch to sync'
