@@ -1,0 +1,56 @@
+name: Monorepo Split
+
+on:
+  workflow_call:
+    secrets:
+      token:
+        required: true
+    inputs:
+      targetBranch:
+        type: string
+        description: 'Branch to target workflow against'
+        required: false
+        default: 'main'
+      packages:
+        type: string
+        description: 'Package to be split'
+        required: true
+      orgName:
+        type: string
+        description: 'Name of the GitHub organization'
+        required: true
+      commitUsername:
+        type: string
+        description: 'Name of the committer'
+        required: false
+        default: 'EncoreBot'
+      commitEmailAddress:
+        type: string
+        description: 'Email address of the committer'
+        required: false
+        default: 'ghbot@encoredigitalgroup.com'
+
+jobs:
+  SplitMonorepo:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        package:
+          - ${{ inputs.packages }}
+    steps:
+      - uses: actions/checkout@v3
+      - id: previousTag
+        uses: 'WyriHaximus/github-action-get-previous-tag@master'
+      - name: Monorepo Split of ${{ matrix.package }}
+        uses: danharrin/monorepo-split-github-action@v2.3.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          package_directory: 'packages/${{ matrix.package }}'
+          repository_organization: ${{ inputs.orgName }}
+          repository_name: ${{ matrix.package }}
+          branch: ${{ inputs.targetBranch }}
+          tag: ${{ steps.previousTag.outputs.tag }}
+          user_name: ${{ $inputs.commitUsername }}
+          user_email: ${{ inputs.commitEmailAddress }}
