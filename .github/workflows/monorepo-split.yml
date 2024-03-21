@@ -5,25 +5,30 @@ on:
     secrets:
       token:
         required: true
+    
     inputs:
       targetBranch:
         type: string
         description: 'Branch to target workflow against'
         required: false
         default: 'main'
-      packages:
+      
+      package:
         type: string
         description: 'Package to be split'
         required: true
+      
       orgName:
         type: string
         description: 'Name of the GitHub organization'
         required: true
+      
       commitUsername:
         type: string
         description: 'Name of the committer'
         required: false
         default: 'EncoreBot'
+      
       commitEmailAddress:
         type: string
         description: 'Email address of the committer'
@@ -39,10 +44,24 @@ jobs:
         package:
           - ${{ inputs.packages }}
     steps:
-      - uses: actions/checkout@v3
+      - id: pathFilter
+        uses: dorny/paths-filter@v3
+        with:
+          filters: |
+            package:
+              - 'app_modules/${{ matrix.package }}/**'
+
+      - id: actionCheckout
+        if: steps.pathFilter.outputs.package == 'true'
+        uses: actions/checkout@v3
+
       - id: previousTag
+        if: steps.pathFilter.outputs.package == 'true'
         uses: 'WyriHaximus/github-action-get-previous-tag@master'
-      - name: Monorepo Split of ${{ matrix.package }}
+
+      - id: splitStep
+        if: steps.pathFilter.outputs.package == 'true'
+        name: Monorepo Split of ${{ matrix.package }}
         uses: danharrin/monorepo-split-github-action@v2.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
