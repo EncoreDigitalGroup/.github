@@ -42,7 +42,7 @@ jobs:
       fail-fast: false
       matrix:
         package:
-          - ${{ inputs.packages }}
+          - ${{ inputs.package }}
     steps:
       - name: 'Checkout Code'
         id: actionCheckout
