@@ -27,13 +27,13 @@ on:
         type: string
         description: 'Name of the committer'
         required: false
-        default: 'Marc Beinder'
+        default: 'EncoreBot'
       
       commitEmailAddress:
         type: string
         description: 'Email address of the committer'
         required: false
-        default: 'marc.beinder@encoredigitalgroup.com'
+        default: 'ghbot@encoredigitalgroup.com'
 
 jobs:
   SplitMonorepo:
@@ -51,7 +51,7 @@ jobs:
         id: splitStep
         uses: danharrin/monorepo-split-github-action@v2.3.0
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.token }}
         with:
           package_directory: 'src/${{ inputs.package }}'
           repository_organization: ${{ inputs.orgName }}
