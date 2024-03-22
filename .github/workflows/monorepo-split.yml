@@ -47,13 +47,13 @@ jobs:
         id: previousTag
         uses: 'WyriHaximus/github-action-get-previous-tag@master'
 
-      - name: 'Monorepo Split of ${{ matrix.package }}'
+      - name: 'Monorepo Split of ${{ inputs.package }}'
         id: splitStep
         uses: danharrin/monorepo-split-github-action@v2.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.token }}
         with:
-          package_directory: 'src/${{ inputs.package }}'
+          package_directory: '${{ inputs.package }}'
           repository_organization: ${{ inputs.orgName }}
           repository_name: ${{ inputs.package }}
           branch: ${{ inputs.targetBranch }}
