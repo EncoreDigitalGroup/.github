@@ -58,10 +58,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          package_directory: 'packages/${{ matrix.package }}'
+          package_directory: '${{ matrix.package }}'
           repository_organization: ${{ inputs.orgName }}
           repository_name: ${{ matrix.package }}
           branch: ${{ inputs.targetBranch }}
           tag: ${{ steps.previousTag.outputs.tag }}
-          user_name: ${{ $inputs.commitUsername }}
+          user_name: ${{ inputs.commitUsername }}
           user_email: ${{ inputs.commitEmailAddress }}
