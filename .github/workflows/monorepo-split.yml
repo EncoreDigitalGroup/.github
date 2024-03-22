@@ -27,13 +27,13 @@ on:
         type: string
         description: 'Name of the committer'
         required: false
-        default: 'EncoreBot'
+        default: 'Marc Beinder'
       
       commitEmailAddress:
         type: string
         description: 'Email address of the committer'
         required: false
-        default: 'ghbot@encoredigitalgroup.com'
+        default: 'marc.beinder@encoredigitalgroup.com'
 
 jobs:
   SplitMonorepo:
