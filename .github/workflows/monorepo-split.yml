@@ -44,24 +44,16 @@ jobs:
         package:
           - ${{ inputs.packages }}
     steps:
-      - id: pathFilter
-        uses: dorny/paths-filter@v3
-        with:
-          filters: |
-            package:
-              - 'app_modules/${{ matrix.package }}/**'
-
-      - id: actionCheckout
-        if: steps.pathFilter.outputs.package == 'true'
+      - name: 'Checkout Code'
+        id: actionCheckout
         uses: actions/checkout@v3
 
-      - id: previousTag
-        if: steps.pathFilter.outputs.package == 'true'
+      - name: 'Get Previous Tag'
+        id: previousTag
         uses: 'WyriHaximus/github-action-get-previous-tag@master'
 
-      - id: splitStep
-        if: steps.pathFilter.outputs.package == 'true'
-        name: Monorepo Split of ${{ matrix.package }}
+      - name: 'Monorepo Split of ${{ matrix.package }}'
+        id: splitStep
         uses: danharrin/monorepo-split-github-action@v2.3.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
