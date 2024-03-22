@@ -38,11 +38,6 @@ on:
 jobs:
   SplitMonorepo:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        package:
-          - ${{ inputs.package }}
     steps:
       - name: 'Checkout Code'
         id: actionCheckout
@@ -58,9 +53,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          package_directory: 'src/${{ matrix.package }}'
+          package_directory: 'src/${{ inputs.package }}'
           repository_organization: ${{ inputs.orgName }}
-          repository_name: ${{ matrix.package }}
+          repository_name: ${{ inputs.package }}
           branch: ${{ inputs.targetBranch }}
           tag: ${{ steps.previousTag.outputs.tag }}
           user_name: ${{ inputs.commitUsername }}
