@@ -6,7 +6,7 @@ on:
       phpVersion:
         type: string
         description: 'PHP Version'
-        required: true
+        required: false
         default: '8.2'
 
 jobs:
