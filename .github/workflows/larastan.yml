@@ -2,6 +2,17 @@ name: PHP Code Analysis
 
 on:
   workflow_call:
+    inputs:
+      phpVersion:
+        type: string
+        description: 'PHP Version'
+        required: false
+        default: '8.2'
+      path:
+        type: string
+        description: 'Path to analyze'
+        required: false
+        default: 'app/ app_modules/'
 
 jobs:
   StaticAnalysis:
@@ -9,12 +20,12 @@ jobs:
     steps:
       - uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.3'
+          php-version: ${{ inputs.phpVersion }}
       - uses: actions/checkout@v3
       - name: Install Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
       - uses: php-actions/phpstan@v3
         with:
-          path: app/ app_modules/
-          php_version: "8.3"
+          path: ${{ inputs.path }}
+          php_version: ${{ inputs.phpVersion }}
           configuration: phpstan.neon
