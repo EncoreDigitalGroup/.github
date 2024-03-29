@@ -29,6 +29,10 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+## Contribution Terms
+
+Contributions to Encore Digital Group projects are governed by the [Contribution Terms](CONTRIBUTING-TERMS.md).
+
 ## Artificial Intelligence Exclusion
 
 The contents of this repository may not be used to train any Artificial Intelligence models and/or technology,
