@@ -31,7 +31,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ## Contribution Terms
 
-Contributions to Encore Digital Group projects are governed by the [Contribution Terms](CONTRIBUTING-TERMS.md).
+Contributions to Encore Digital Group projects are governed by the [Contribution Terms](CODE-CONTRIBUTION-TERMS.md).
 
 ## Artificial Intelligence Exclusion
 
