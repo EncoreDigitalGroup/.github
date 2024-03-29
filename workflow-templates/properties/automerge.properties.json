@@ -1,6 +1,0 @@
-{
-  "name": "Auto-Merge Approved Pull Requests",
-  "description": "Automatically merges PRs that have met the approval criteria.",
-  "iconName": "octicon smiley",
-  "categories": ["Automation", "SLDC"]
-}
