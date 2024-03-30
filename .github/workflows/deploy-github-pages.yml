@@ -4,7 +4,7 @@ name: Deploy GitHub Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: [$default-branch]
+    branches: [ $default-branch ]
   workflow_call:
 
   # Allows you to run this workflow manually from the Actions tab
@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: 'docs/'
+          path: '$GITHUB_WORKSPACE/docs/'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
