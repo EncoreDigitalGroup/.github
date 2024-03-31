@@ -19,5 +19,5 @@ information about how you can contribute, as well as the expectations we have fo
 
 ## Contribution Terms
 
-In addition to a set of Contribution Guidelines, we also have a set of [Contribution Terms](CODE-CONTRIBUTION-TERMS.md)
+In addition to a set of Contribution Guidelines, we also have a set of [Contribution Terms](/CODE-CONTRIBUTION-TERMS.md)
 that govern the legal aspects of contributions. By contributing to our projects, you agree to these terms.
