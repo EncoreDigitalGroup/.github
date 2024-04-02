@@ -43,7 +43,7 @@ Such acceptable uses include training AI internal to your company in order to ai
 directly employed by your company in the development of software and the AI is not used to
 create a commercial product or service in which the AI is a part of the product or service.
 
-## License Credit
+## License Attribution
 
 This license is a modified version of the BSD 3-Clause License. The original license can be found at
 https://opensource.org/licenses/BSD-3-Clause.
