@@ -23,22 +23,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
+
       - uses: EncoreDigitalGroup/action-sync-branch@main
         with:
           branch: ${{ inputs.branch }}
           token: ${{ secrets.token }}
           force: ${{ inputs.force }}
-  
-  WriteVersionFile:
-    runs-on: ubuntu-latest
-    name: WriteVersionFile
-    needs: SyncBranch
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v3
-      - id: previousTag
-        uses: 'WyriHaximus/github-action-get-previous-tag@master'
 
       - name: WriteVersionFile
         id: writeVersionFile
