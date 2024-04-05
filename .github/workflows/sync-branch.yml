@@ -18,7 +18,7 @@ on:
 
 jobs:
   SyncBranch:
-    name: Sync Branch
+    name: SyncBranch
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,3 +28,27 @@ jobs:
           branch: ${{ inputs.branch }}
           token: ${{ secrets.token }}
           force: ${{ inputs.force }}
+  
+  WriteVersionFile:
+    runs-on: ubuntu-latest
+    name: WriteVersionFile
+    needs: SyncBranch
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - id: previousTag
+        uses: 'WyriHaximus/github-action-get-previous-tag@master'
+
+      - name: WriteVersionFile
+        id: writeVersionFile
+        run: |
+          rm -f ./.version
+          echo ${{ steps.previousTag.outputs.tag }} >> .version
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: ${{ inputs.branch }}
+          commit_message: ${{ steps.previousTag.outputs.tag }}
+          commit_user_name: EncoreBot
+          commit_user_email: ghbot@encoredigitalgroup.com
