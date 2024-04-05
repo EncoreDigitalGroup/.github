@@ -4,7 +4,7 @@ on:
   workflow_call:
     secrets:
       token:
-         required: true
+        required: true
     inputs:
       pre_release:
         type: boolean
@@ -36,3 +36,25 @@ jobs:
           generateReleaseNotes: ${{ inputs.generate_release_notes }}
           draft: ${{ inputs.is_draft }}
           prerelease: ${{ inputs.pre_release }}
+
+  WriteVersionFile:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - id: previousTag
+        uses: 'WyriHaximus/github-action-get-previous-tag@master'
+
+      - name: WriteVersionFile
+        id: writeVersionFile
+        run: |
+          rm -f ./.version
+          echo ${{ steps.previousTag.outputs.tag }} >> .version
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: WriteVersionFile
+          commit_user_name: EncoreBot
+          commit_user_email: ghbot@encoredigitalgroup.com
