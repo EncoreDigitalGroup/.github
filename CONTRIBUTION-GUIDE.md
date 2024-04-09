@@ -70,3 +70,4 @@ Thank you for contributing!
 ## Attribution
 
 This contribution guide was adapted from the [Livewire Contribution Guide](https://livewire.laravel.com/docs/contribution-guide).
+Most Templates are either inspired by or adapted from [Livewire](https://github.com/livewire/livewire).
