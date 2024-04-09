@@ -14,6 +14,7 @@ you finalize your pull requests.
 * [Getting Started](#getting-started)
     * [Issues](#issues)
     * [Pull Requests](#pull-requests)
+* [Contribution Guide](#contribution-guide)
 * [Getting Help](#getting-help)
 
 ## Code of Conduct
@@ -34,6 +35,11 @@ Contributions are made to this repo via Issues and Pull Requests (PRs). A few ge
 - If you've never contributed before,
   see [the first timer's guide on Auth0's blog](https://auth0.com/blog/a-first-timers-guide-to-an-open-source-project/)
   for resources and tips on how to get started.
+
+## Contribution Guide
+
+This project uses the [Encore Digital Group Contribution Terms](/CODE-CONTRIBUTION-TERMS.md) to manage contributions.
+Additionally please follow our [Contribution Guide](/CONTRIBUTION-GUIDE.md) when contributing to projects.
 
 ### Issues
 
