@@ -41,7 +41,7 @@ Contributions are made to this repo via Issues and Pull Requests (PRs). A few ge
 This project uses the [Encore Digital Group Contribution Terms](/CODE-CONTRIBUTION-TERMS.md) to manage contributions.
 Additionally please follow our [Contribution Guide](/CONTRIBUTION-GUIDE.md) when contributing to projects.
 
-### Issues
+## Issues
 
 Issues should be used to report problems with the library, request a new feature, or to discuss potential changes before
 a PR is created. When you create a new Issue, a template will be loaded that will guide you through collecting and
@@ -52,7 +52,7 @@ existing issue rather than creating a new one. Adding
 a [reaction](https://github.blog/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/) can also help be
 indicating to our maintainers that a particular problem is affecting more than just the reporter.
 
-### Pull Requests
+## Pull Requests
 
 PRs to our libraries are always welcome and can be a quick way to get your fix or improvement slated for the next
 release. In general, PRs should:
