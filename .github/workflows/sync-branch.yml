@@ -30,6 +30,10 @@ jobs:
           token: ${{ secrets.token }}
           force: ${{ inputs.force }}
 
+      - name: 'Get Previous Tag'
+        id: previousTag
+        uses: 'WyriHaximus/github-action-get-previous-tag@master'
+
       - name: WriteVersionFile
         id: writeVersionFile
         run: |
