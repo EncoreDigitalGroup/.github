@@ -8,6 +8,10 @@ on:
       - '!v[0-9]'
   workflow_dispatch:
 
+permissions:
+  pull-requests: write
+  contents: write
+
 jobs:
   CreateRelease:
     name: Create Release
