@@ -25,14 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: 'Get Previous Tag'
-        id: previousTag
-        uses: 'WyriHaximus/github-action-get-previous-tag@master'
-
       - name: RemoveMajorTag
         id: removeMajorTag
         run: |
-          git tag -d ${{ steps.previousTag.outputs.tag }}
+          git tag -d v1
 
       - name: ReplaceMajorTag
         id: replaceMajorTag
