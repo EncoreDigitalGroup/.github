@@ -5,6 +5,7 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+'
       - '!v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
+      - '!v[0-9]'
   workflow_dispatch:
 
 jobs:
@@ -16,3 +17,32 @@ jobs:
       is_draft: false
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
+  
+  PrepareTags:
+    name: PrepareTags
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: 'Get Previous Tag'
+        id: previousTag
+        uses: 'WyriHaximus/github-action-get-previous-tag@master'
+
+      - name: RemoveMajorTag
+        id: removeMajorTag
+        run: |
+          git tag -d ${{ steps.previousTag.outputs.tag }}
+
+      - name: ReplaceMajorTag
+        id: replaceMajorTag
+        run: |
+          git tag v1
+
+      - name: CommitTags
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: ${{ inputs.branch }}
+          commit_message: 'Update Reference Tags'
+          commit_user_name: EncoreBot
+          commit_user_email: ghbot@encoredigitalgroup.com
