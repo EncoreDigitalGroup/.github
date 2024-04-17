@@ -25,20 +25,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
-      - name: RemoveMajorTag
-        id: removeMajorTag
-        run: |
-          git tag -d v1
-
       - name: ReplaceMajorTag
         id: replaceMajorTag
         run: |
-          git tag v1
-
-      - name: CommitTags
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          branch: ${{ inputs.branch }}
-          commit_message: 'Update Reference Tags'
-          commit_user_name: EncoreBot
-          commit_user_email: ghbot@encoredigitalgroup.com
+          git tag -d v1
+          git push origin --delete v1
+          git tag v1 ${{github.ref}}
+          git push origin v1
