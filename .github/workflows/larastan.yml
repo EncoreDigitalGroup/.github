@@ -13,6 +13,11 @@ on:
         description: 'Path to analyze'
         required: false
         default: 'app/ app_modules/'
+      branch:
+        type: string
+        description: 'The branch to analize'
+        required: false
+        default: 'main'
 
 jobs:
   StaticAnalysis:
@@ -22,6 +27,8 @@ jobs:
         with:
           php-version: ${{ inputs.phpVersion }}
       - uses: actions/checkout@v3
+        with: 
+          ref: ${{ inputs.branch }}
       - name: Install Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
       - uses: php-actions/phpstan@v3
