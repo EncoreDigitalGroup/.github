@@ -7,6 +7,11 @@ on:
         description: 'PHP Version'
         required: false
         default: '8.2'
+      branch:
+        type: string
+        description: 'The branch to analize'
+        required: false
+        default: 'main'
 
 jobs:
   RunPest:
