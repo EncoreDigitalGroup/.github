@@ -40,7 +40,7 @@ jobs:
           rm -f ./.version
           echo ${{ steps.previousTag.outputs.tag }} >> .version
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           branch: ${{ inputs.branch }}
           commit_message: ${{ steps.previousTag.outputs.tag }}

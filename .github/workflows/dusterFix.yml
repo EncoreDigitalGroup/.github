@@ -4,11 +4,11 @@ name: Duster Fix
 # Checkout Duster's documentation for a workaround
 
 on:
-    #push:
-    #    branches: [ main ]
-    #pull_request:
-    workflow_call:
-    merge_group:
+  #push:
+  #    branches: [ main ]
+  #pull_request:
+  workflow_call:
+  merge_group:
 
 jobs:
   Duster:
@@ -27,7 +27,7 @@ jobs:
         with:
           args: fix
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Dusting
           commit_user_name: GitHub Action
