@@ -25,9 +25,11 @@ jobs:
   PrepareTags:
     name: PrepareTags
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Checkout
         uses: actions/checkout@master
+
 
       - name: ReplaceMajorTag
         id: replaceMajorTag

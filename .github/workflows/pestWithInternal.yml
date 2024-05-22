@@ -1,12 +1,11 @@
-name: PHP Code Analysis
-
+name: PestUnitTests
 on:
   workflow_call:
     secrets:
       laravelEnvDecryptionKey:
-        required: false
+        required: true
     inputs:
-      composer_auth_json:
+      composerAuthJson:
         type: string
         required: true
         description: 'Composer Auth JSON'
@@ -15,16 +14,16 @@ on:
         description: 'PHP Version'
         required: false
         default: '8.2'
-      path:
-        type: string
-        description: 'Path to analyze'
-        required: false
-        default: 'app/ app_modules/'
       branch:
         type: string
         description: 'The branch to analize'
         required: false
         default: 'main'
+      enforceCoverage:
+        type: boolean
+        description: 'Should the coverage requirement be enforced?'
+        required: false
+        default: true
       useLaravelEnvDecryptionKey:
         type: boolean
         description: 'Should the Laravel environment decryption key be used?'
@@ -32,21 +31,26 @@ on:
         default: false
 
 jobs:
-  StaticAnalysis:
+  RunPest:
     runs-on: ubuntu-latest
-    steps:
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ inputs.phpVersion }}
 
-      - uses: actions/checkout@v3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           ref: ${{ inputs.branch }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ inputs.phpVersion }}
+          tools: composer:v2
+          coverage: xdebug
 
       - name: Add Composer Auth File
         run: |
           touch $GITHUB_WORKSPACE/auth.json
-          echo '${{inputs.composer_auth_json}}' > $GITHUB_WORKSPACE/auth.json
+          echo '${{inputs.composerAuthJson}}' > $GITHUB_WORKSPACE/auth.json
 
       - name: Install Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist --ignore-platform-reqs
@@ -57,8 +61,10 @@ jobs:
           php artisan env:decrypt --env=testing --key=${{secrets.laravelEnvDecryptionKey}}
           mv $GITHUB_WORKSPACE/.env.testing $GITHUB_WORKSPACE/.env
 
-      - uses: php-actions/phpstan@v3
-        with:
-          path: ${{ inputs.path }}
-          php_version: ${{ inputs.phpVersion }}
-          configuration: phpstan.neon
+      - name: Run Pest Tests (with Coverage)
+        if: ${{ inputs.enforceCoverage }}
+        run: ./vendor/bin/pest --coverage --min=80
+
+      - name: Run Pest Tests (without Coverage)
+        if: ${{ !inputs.enforceCoverage }}
+        run: ./vendor/bin/pest
