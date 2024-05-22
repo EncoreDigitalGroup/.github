@@ -12,6 +12,11 @@ on:
         description: 'The branch to analize'
         required: false
         default: 'main'
+      enforceCoverage:
+        type: boolean
+        description: 'Should the coverage requirement be enforced?'
+        required: false
+        default: true
 
 jobs:
   RunPest:
@@ -33,5 +38,10 @@ jobs:
       - name: Install Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
 
-      - name: Run Pest Tests
+      - name: Run Pest Tests (with Coverage)
+        if: ${{ inputs.enforceCoverage }}
         run: ./vendor/bin/pest --coverage --min=80
+
+      - name: Run Pest Tests (without Coverage)
+        if: ${{ !inputs.enforceCoverage }}
+        run: ./vendor/bin/pest
